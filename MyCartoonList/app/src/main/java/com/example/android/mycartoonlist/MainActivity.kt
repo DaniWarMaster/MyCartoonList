@@ -22,13 +22,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // get toolbar from main activity layout
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+        // get the drawer from main activity layout
         drawer = findViewById(R.id.drawer_layout)
         val navigationView = findViewById<NavigationView>(R.id.navigation_view)
         navigationView.setNavigationItemSelectedListener(this)
 
+        // create custom toggle action/button for drawer menu
         val toggle = ActionBarDrawerToggle(
             this,
             drawer,
@@ -40,6 +43,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer.addDrawerListener(toggle)
         toggle.syncState()
 
+        // initialize activity fragment with news_feed as begining only if the fragment is created
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.drawer_fragment_container, NewsFeedFragment()).commit()

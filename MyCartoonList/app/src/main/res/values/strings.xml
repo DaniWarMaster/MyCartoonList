@@ -4,4 +4,14 @@
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
 
+    <string name="drawer_menu_main_category">Main</string>
+    <string name="drawer_menu_personal_category">Personal</string>
+    <string name="drawer_menu_preferences_category">Preferences</string>
+    <string name="drawer_menu_settings_option">Setting</string>
+    <string name="drawer_menu_profile_option">Profile</string>
+    <string name="drawer_menu_login_option">Login</string>
+    <string name="drawer_menu_logout_option">Logout</string>
+    <string name="drawer_menu_main_list_option">Main List</string>
+    <string name="drawer_menu_news_feed_option">News Feed</string>
+
 </resources>

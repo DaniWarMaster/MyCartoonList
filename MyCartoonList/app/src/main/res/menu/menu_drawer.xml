@@ -4,39 +4,39 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item android:title="Main">
+        <item android:title="@string/drawer_menu_main_category">
             <menu>
                 <group android:checkableBehavior="single">
                     <item
                         android:id="@+id/nav_newsFeed"
                         android:icon="@drawable/ic_menu_icon_news_feed"
-                        android:title="News Feed" />
+                        android:title="@string/drawer_menu_news_feed_option" />
                     <item
                         android:id="@+id/nav_mainList"
                         android:icon="@drawable/ic_menu_icon_main_list"
-                        android:title="Main List" />
+                        android:title="@string/drawer_menu_main_list_option" />
                 </group>
             </menu>
         </item>
 
-        <item android:title="Personal">
+        <item android:title="@string/drawer_menu_personal_category">
             <menu>
                 <group android:checkableBehavior="single">
                     <item
                         android:id="@+id/nav_profile"
                         android:icon="@drawable/ic_menu_icon_profile"
-                        android:title="Profile" />
+                        android:title="@string/drawer_menu_profile_option" />
                 </group>
             </menu>
         </item>
 
-        <item android:title="Preferences">
+        <item android:title="@string/drawer_menu_preferences_category">
             <menu>
                 <group android:checkableBehavior="single">
                     <item
                         android:id="@+id/nav_settings"
                         android:icon="@drawable/ic_menu_icon_settings"
-                        android:title="Setting" />
+                        android:title="@string/drawer_menu_settings_option" />
                 </group>
             </menu>
         </item>
@@ -44,11 +44,11 @@
         <item
             android:id="@+id/nav_login"
             android:icon="@drawable/ic_menu_icon_login"
-            android:title="Login" />
+            android:title="@string/drawer_menu_login_option" />
     </group>
 
     <item
         android:id="@+id/nav_logout"
         android:icon="@drawable/ic_menu_icon_logout"
-        android:title="Logout" />
+        android:title="@string/drawer_menu_logout_option" />
 </menu>

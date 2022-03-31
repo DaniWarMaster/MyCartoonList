@@ -8,16 +8,18 @@
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
+    <!-- App Custom Logo & Name -->
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round"></ImageView>
+        android:contentDescription="@string/app_name"
+        android:src="@mipmap/ic_launcher_round"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-        android:text="MyCartoonList">
+        android:text="@string/app_name">
 
     </TextView>
 
