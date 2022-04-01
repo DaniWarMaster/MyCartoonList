@@ -13,5 +13,11 @@
     <string name="drawer_menu_logout_option">Logout</string>
     <string name="drawer_menu_main_list_option">Main List</string>
     <string name="drawer_menu_news_feed_option">News Feed</string>
+    <string name="login_hint_username">Username</string>
+    <string name="login_hint_password">Password</string>
+    <string name="login_forgot_account">Forgot Account ?</string>
+    <string name="login_sign_in_button">Sign In</string>
+    <string name="login_don_t_have_an_account">Don\'t have an account ?</string>
+    <string name="login_create_account">Create Account</string>
 
 </resources>
