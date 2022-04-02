@@ -19,5 +19,12 @@
     <string name="login_sign_in_button">Sign In</string>
     <string name="login_don_t_have_an_account">Don\'t have an account ?</string>
     <string name="login_create_account">Create Account</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email_recover_password">Email</string>
+    <string name="email_recovery_message_information">Please insert the corresponding email of the account for credential recovery:</string>
+    <string name="recover_fragment_recover_button">Recover</string>
+    <string name="register_fragment_create_account_subtitle">-Create Account-</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="create_account">Create Account</string>
 
 </resources>
