@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile.ProfileNotLoggedFragment">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingBottom="30dp"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/profile_notLogged_fragment_opsIcon"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/oops"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/profile_notLogged_fragment_NoUserLoggedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_notLogged_fragment_opsIcon"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:padding="8dp"
+            android:text="@string/oops_no_user_account_detected"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_notLogged_fragment_NoUserLoggedText"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/profile_notLogged_fragment_loginButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/drawer_menu_login_option"
+                android:textColor="@color/purple_700"
+                android:textSize="22sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:text="@string/or"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/profile_notLogged_fragment_createAccountButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/create_account"
+                android:textColor="@color/purple_700"
+                android:textSize="22sp" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>
