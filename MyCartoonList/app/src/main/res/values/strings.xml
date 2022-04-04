@@ -39,5 +39,6 @@
     <string name="planned_to_watch">Planned to Watch:</string>
     <string name="completed">Completed:</string>
     <string name="watching">Watching:</string>
+    <string name="cartoon_image">Cartoon_Image</string>
 
 </resources>
