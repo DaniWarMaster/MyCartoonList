@@ -40,5 +40,14 @@
     <string name="completed">Completed:</string>
     <string name="watching">Watching:</string>
     <string name="cartoon_image">Cartoon_Image</string>
+    <string name="score">Score</string>
+    <string name="rank">Rank</string>
+    <string name="nr_of_episodes">Nr. of episodes</string>
+    <string name="type">Type</string>
+    <string name="aired">Aired</string>
+    <string name="source">Source</string>
+    <string name="studio">Studio</string>
+    <string name="season">Season</string>
+    <string name="rating">Rating</string>
 
 </resources>
