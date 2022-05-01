@@ -26,6 +26,10 @@
                         android:id="@+id/nav_profile"
                         android:icon="@drawable/ic_menu_icon_profile"
                         android:title="@string/drawer_menu_profile_option" />
+                    <item
+                        android:id="@+id/nav_personalList"
+                        android:icon="@drawable/ic_menu_icon_main_list"
+                        android:title="@string/drawer_menu_my_list" />
                 </group>
             </menu>
         </item>
@@ -41,11 +45,12 @@
             </menu>
         </item>
 
-        <item
-            android:id="@+id/nav_login"
-            android:icon="@drawable/ic_menu_icon_login"
-            android:title="@string/drawer_menu_login_option" />
     </group>
+
+    <item
+        android:id="@+id/nav_login"
+        android:icon="@drawable/ic_menu_icon_login"
+        android:title="@string/drawer_menu_login_option" />
 
     <item
         android:id="@+id/nav_logout"

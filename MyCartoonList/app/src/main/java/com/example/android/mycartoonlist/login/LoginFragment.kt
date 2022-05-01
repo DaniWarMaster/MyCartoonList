@@ -65,7 +65,8 @@ class LoginFragment : Fragment() {
             Common.isLogged = true
 
             // redirecting the user to the newsfeed page
-            parentFragmentManager.beginTransaction().replace(R.id.drawer_fragment_container, NewsFeedFragment()).commit()
+            //parentFragmentManager.beginTransaction().replace(R.id.drawer_fragment_container, NewsFeedFragment()).commit()
+            activity?.finish()
         }
         else {
             Toast.makeText(view?.context,"Login Failed",Toast.LENGTH_SHORT).show()
@@ -74,12 +75,20 @@ class LoginFragment : Fragment() {
 
     fun forgotPasswordFunction() {
         //redirecting to the fragment for recovering the password
-        parentFragmentManager.beginTransaction().replace(R.id.drawer_fragment_container, RecoverPasswordFragment()).commit()
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.drawer_fragment_container, RecoverPasswordFragment())
+            .setReorderingAllowed(true)
+            .addToBackStack(null)
+            .commit()
     }
 
     fun createAccountFunction() {
         //redirecting to the fragment for creating the account
-        parentFragmentManager.beginTransaction().replace(R.id.drawer_fragment_container, RegisterFragment()).commit()
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.drawer_fragment_container, RegisterFragment())
+            .setReorderingAllowed(true)
+            .addToBackStack(null)
+            .commit()
     }
 
     companion object {

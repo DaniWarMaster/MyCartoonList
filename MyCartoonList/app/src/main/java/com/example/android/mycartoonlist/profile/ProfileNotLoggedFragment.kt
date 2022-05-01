@@ -1,11 +1,13 @@
 package com.example.android.mycartoonlist.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.android.mycartoonlist.LoginActivity
 import com.example.android.mycartoonlist.R
 import com.example.android.mycartoonlist.common.Common
 import com.example.android.mycartoonlist.createAccount.RegisterFragment
@@ -40,11 +42,19 @@ class ProfileNotLoggedFragment : Fragment(){
 
     /// ar trebui schimbate altfel
     fun loginOperation() {
-        parentFragmentManager.beginTransaction().replace(R.id.drawer_fragment_container, LoginFragment()).commit()
+        //parentFragmentManager.beginTransaction().replace(R.id.drawer_fragment_container, LoginFragment()).commit()
+        val intent = Intent(context, LoginActivity::class.java).apply {
+            putExtra(Common.LoginActivityIntent, true)
+        }
+        startActivity(intent)
     }
 
     fun createAccountOperation() {
-        parentFragmentManager.beginTransaction().replace(R.id.drawer_fragment_container, RegisterFragment()).commit()
+        //parentFragmentManager.beginTransaction().replace(R.id.drawer_fragment_container, RegisterFragment()).commit()
+        val intent = Intent(context, LoginActivity::class.java).apply {
+            putExtra(Common.LoginActivityIntent, false)
+        }
+        startActivity(intent)
     }
 
     companion object {

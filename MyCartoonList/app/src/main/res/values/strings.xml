@@ -49,5 +49,7 @@
     <string name="studio">Studio</string>
     <string name="season">Season</string>
     <string name="rating">Rating</string>
+    <string name="comments_amp_reviews"><![CDATA[Comments & Reviews]]></string>
+    <string name="drawer_menu_my_list">My List</string>
 
 </resources>

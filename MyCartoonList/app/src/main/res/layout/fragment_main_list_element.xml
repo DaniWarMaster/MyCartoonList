@@ -27,6 +27,7 @@
                     android:layout_height="240dp"
                     android:layout_alignParentStart="true"
                     android:layout_margin="15dp"
+                    android:contentDescription="@string/cartoon_image"
                     android:src="@mipmap/ic_launcher" />
 
                 <LinearLayout
@@ -276,7 +277,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="10dp"
-                android:text="Comments &amp; Reviews"
+                android:text="@string/comments_amp_reviews"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -285,7 +286,8 @@
                 android:id="@+id/mainList_details_comments"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="40dp" />
+                android:layout_marginHorizontal="40dp"
+                tools:ignore="NestedScrolling" />
 
         </LinearLayout>
     </ScrollView>
