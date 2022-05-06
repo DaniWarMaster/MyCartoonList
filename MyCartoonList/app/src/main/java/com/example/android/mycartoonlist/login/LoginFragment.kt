@@ -1,6 +1,7 @@
 package com.example.android.mycartoonlist.login
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +9,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.example.android.mycartoonlist.LoginActivity
 import com.example.android.mycartoonlist.R
 import com.example.android.mycartoonlist.common.Common
+import com.example.android.mycartoonlist.common.Tags
 import com.example.android.mycartoonlist.createAccount.RegisterFragment
 import com.example.android.mycartoonlist.newsFeed.NewsFeedFragment
 import com.example.android.mycartoonlist.recoverPassword.RecoverPasswordFragment
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class LoginFragment : Fragment() {
 
@@ -22,11 +28,15 @@ class LoginFragment : Fragment() {
     private lateinit var createAccountButton : TextView
     private lateinit var username : TextInputEditText
     private lateinit var password : TextInputEditText
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        auth = Firebase.auth
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
@@ -54,10 +64,27 @@ class LoginFragment : Fragment() {
     }
 
     fun loginFunction() {
-        val usernameText = username.text
-        val passwordText = password.text
+        val usernameText = username.text.toString()
+        val passwordText = password.text.toString()
+
+        auth.signInWithEmailAndPassword(usernameText, passwordText)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(Tags.LoginFragment, "signInWithEmail:success")
+                    val user = auth.currentUser
+                    //updateUI(user)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(Tags.LoginFragment, "signInWithEmail:failure", task.exception)
+                    Toast.makeText(context, "Authentication failed.",
+                        Toast.LENGTH_SHORT).show()
+                    //updateUI(null)
+                }
+            }
 
         //// swap with http request after doing the backend
+        /*
         if(usernameText.contentEquals("Daniel") && passwordText.contentEquals("12345")) {
             Toast.makeText(view?.context,"Login Succesfull",Toast.LENGTH_SHORT).show()
 
@@ -71,6 +98,7 @@ class LoginFragment : Fragment() {
         else {
             Toast.makeText(view?.context,"Login Failed",Toast.LENGTH_SHORT).show()
         }
+         */
     }
 
     fun forgotPasswordFunction() {

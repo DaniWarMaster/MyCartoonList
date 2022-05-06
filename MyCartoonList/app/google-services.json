@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "347230917647",
+    "project_id": "mycartoonlist-67d5e",
+    "storage_bucket": "mycartoonlist-67d5e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:347230917647:android:53b0f023701ed67de6ff7a",
+        "android_client_info": {
+          "package_name": "com.example.android.mycartoonlist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "347230917647-vqil0dt2qpc16b293mjtur98jqgku8nm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBo0oId9dE5hHygtjrU039WqeF13_zl6i4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "347230917647-vqil0dt2qpc16b293mjtur98jqgku8nm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

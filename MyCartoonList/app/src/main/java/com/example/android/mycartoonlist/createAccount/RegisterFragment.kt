@@ -1,6 +1,7 @@
 package com.example.android.mycartoonlist.createAccount
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +9,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import com.example.android.mycartoonlist.R
+import com.example.android.mycartoonlist.common.Tags
 import com.example.android.mycartoonlist.login.LoginFragment
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class RegisterFragment : Fragment() {
@@ -20,10 +25,14 @@ class RegisterFragment : Fragment() {
     private lateinit var confirmPassword : TextInputEditText
     private lateinit var email : TextInputEditText
 
+    private lateinit var auth : FirebaseAuth
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        auth = Firebase.auth
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_register, container, false)
     }
@@ -42,16 +51,34 @@ class RegisterFragment : Fragment() {
     }
 
     fun registerFunction() {
-        val usernameText = username.text
-        val passwordText = password.text
-        val confirmPasswordText = confirmPassword.text
-        val emailText = email.text
+        val usernameText = username.text.toString()
+        val passwordText = password.text.toString()
+        val confirmPasswordText = confirmPassword.text.toString()
+        val emailText = email.text.toString()
 
-        Toast.makeText(view?.context, "User Registered", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(view?.context, "User Registered", Toast.LENGTH_SHORT).show()
         // http request for register
 
-        //// redirecting to login fragment
-        parentFragmentManager.beginTransaction().replace(R.id.drawer_fragment_container, LoginFragment()).commit()
+        auth.createUserWithEmailAndPassword(emailText, passwordText)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(Tags.RegisterFragment, "createUserWithEmail:success")
+                    Toast.makeText(context, "Authentication success.",
+                        Toast.LENGTH_SHORT).show()
+                    val user = auth.currentUser
+                    //// redirecting to login fragment
+                    parentFragmentManager.beginTransaction().replace(R.id.drawer_fragment_container, LoginFragment()).commit()
+                    //updateUI(user)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(Tags.RegisterFragment, "createUserWithEmail:failure", task.exception)
+                    Toast.makeText(context, "Authentication failed.",
+                        Toast.LENGTH_SHORT).show()
+                    //updateUI(null)
+                }
+            }
+
     }
 
     companion object {
