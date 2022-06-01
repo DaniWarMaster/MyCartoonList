@@ -35,9 +35,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if(currentUser != null){
             //reload();
             Log.d("MainActivity: ", "User Already Logged ${auth.currentUser}")
+            Common.isLogged = true
+            Common.user = currentUser
         }
         else {
             Log.d("MainActivity: ", "User Not Logged At App Start")
+            Common.isLogged = false
         }
     }
 
@@ -146,6 +149,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 Toast.makeText(this, "Logout Clicked", Toast.LENGTH_SHORT).show()
                 //// logout operation
                 Common.isLogged = false
+                auth.signOut()
                 //// redirecting to news feed fragment
                 supportFragmentManager.beginTransaction().replace(R.id.drawer_fragment_container, NewsFeedFragment()).commit()
             }
