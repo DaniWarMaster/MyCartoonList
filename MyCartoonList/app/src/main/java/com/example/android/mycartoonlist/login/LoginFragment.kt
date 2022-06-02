@@ -1,5 +1,6 @@
 package com.example.android.mycartoonlist.login
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -75,6 +76,7 @@ class LoginFragment : Fragment() {
                     val user = auth.currentUser
                     Common.isLogged = true
                     Common.user = auth.currentUser
+                    activity?.setResult(Activity.RESULT_OK)
                     activity?.finish()
                     //updateUI(user)
                 } else {

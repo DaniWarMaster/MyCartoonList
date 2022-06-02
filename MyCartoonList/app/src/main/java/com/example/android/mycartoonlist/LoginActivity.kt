@@ -1,5 +1,6 @@
 package com.example.android.mycartoonlist
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar

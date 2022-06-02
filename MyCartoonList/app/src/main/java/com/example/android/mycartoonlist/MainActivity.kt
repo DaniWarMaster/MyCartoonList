@@ -1,12 +1,15 @@
 package com.example.android.mycartoonlist
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -27,9 +30,20 @@ import com.google.firebase.ktx.Firebase
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var drawer: DrawerLayout
     private lateinit var auth: FirebaseAuth
+    private lateinit var navigationView: NavigationView
 
     public override fun onStart() {
         super.onStart()
+
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        // intialize firebase
+        auth = Firebase.auth
+
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if(currentUser != null){
@@ -42,14 +56,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Log.d("MainActivity: ", "User Not Logged At App Start")
             Common.isLogged = false
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        // intialize firebase
-        auth = Firebase.auth
 
         // get toolbar from main activity layout
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
@@ -57,7 +63,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // get the drawer from main activity layout
         drawer = findViewById(R.id.drawer_layout)
-        val navigationView = findViewById<NavigationView>(R.id.navigation_view)
+        navigationView = findViewById<NavigationView>(R.id.navigation_view)
         navigationView.setNavigationItemSelectedListener(this)
 
         // create custom toggle action/button for drawer menu
@@ -78,6 +84,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 .replace(R.id.drawer_fragment_container, NewsFeedFragment()).commit()
             navigationView.setCheckedItem(R.id.nav_newsFeed)
         }
+        /*
+        if (Common.isLogged) {
+            navigationView.menu.findItem(R.id.nav_login).isVisible = false
+            navigationView.menu.findItem(R.id.nav_logout).isVisible = true
+        }
+        else {
+            navigationView.menu.findItem(R.id.nav_login).isVisible = true
+            navigationView.menu.findItem(R.id.nav_logout).isVisible = false
+        }
+        */
     }
 
     override fun onBackPressed() {
@@ -99,6 +115,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onResume()
     }
 
+    private val intentLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                supportFragmentManager.beginTransaction().replace(R.id.drawer_fragment_container, MainListFragment()).commit()
+                //navigationView.menu.findItem(R.id.nav_login).isVisible = false
+                //navigationView.menu.findItem(R.id.nav_logout).isVisible = true
+                navigationView.setCheckedItem(R.id.nav_mainList)
+            }
+        }
+
     //// trebuie schimbat gestiunea fragmentelor si eventual crearea de noi activitati
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
@@ -113,7 +139,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val intent = Intent(this, LoginActivity::class.java).apply {
                     putExtra(Common.LoginActivityIntent, true)
                 }
-                startActivity(intent)
+                intentLauncher.launch(intent)
             }
             R.id.nav_profile -> {
                 if (Common.isLogged) {
@@ -150,6 +176,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 //// logout operation
                 Common.isLogged = false
                 auth.signOut()
+                //navigationView.menu.findItem(R.id.nav_logout).isVisible = false
+                //navigationView.menu.findItem(R.id.nav_login).isVisible = true
+                println("----> Login Button visisble: ${navigationView.menu.findItem(R.id.nav_login).isVisible}")
                 //// redirecting to news feed fragment
                 supportFragmentManager.beginTransaction().replace(R.id.drawer_fragment_container, NewsFeedFragment()).commit()
             }

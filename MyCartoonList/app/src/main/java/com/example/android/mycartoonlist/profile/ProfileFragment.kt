@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.android.mycartoonlist.R
 import com.example.android.mycartoonlist.common.Common
+import com.google.android.material.navigation.NavigationView
 
 class ProfileFragment : Fragment() {
 
