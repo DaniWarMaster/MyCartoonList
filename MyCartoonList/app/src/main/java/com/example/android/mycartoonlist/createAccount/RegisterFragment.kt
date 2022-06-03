@@ -14,6 +14,7 @@ import com.example.android.mycartoonlist.login.LoginFragment
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
 
 
@@ -59,26 +60,46 @@ class RegisterFragment : Fragment() {
         //Toast.makeText(view?.context, "User Registered", Toast.LENGTH_SHORT).show()
         // http request for register
 
-        auth.createUserWithEmailAndPassword(emailText, passwordText)
-            .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(Tags.RegisterFragment, "createUserWithEmail:success")
-                    Toast.makeText(context, "Authentication success.",
-                        Toast.LENGTH_SHORT).show()
-                    val user = auth.currentUser
-                    //// redirecting to login fragment
-                    parentFragmentManager.beginTransaction().replace(R.id.drawer_fragment_container, LoginFragment()).commit()
-                    //updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(Tags.RegisterFragment, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(context, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                    //updateUI(null)
-                }
-            }
+        if(passwordText.equals(confirmPasswordText)) {
+            auth.createUserWithEmailAndPassword(emailText, passwordText)
+                .addOnCompleteListener(requireActivity()) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(Tags.RegisterFragment, "createUserWithEmail:success")
+                        Toast.makeText(
+                            context, "Authentication success.",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
+                        ///// add username
+                        val user = auth.currentUser
+                        val profileUpdate = userProfileChangeRequest {
+                            displayName = usernameText
+                        }
+                        user?.updateProfile(profileUpdate)?.addOnCompleteListener {
+                            if(it.isSuccessful) {
+                                Log.d(Tags.RegisterFragment, "createUserWithEmail:usernameAdded")
+                            }
+
+                        }
+                        //// redirecting to login fragment
+                        parentFragmentManager.beginTransaction()
+                            .replace(R.id.drawer_fragment_container, LoginFragment()).commit()
+                        //updateUI(user)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(Tags.RegisterFragment, "createUserWithEmail:failure", task.exception)
+                        Toast.makeText(
+                            context, "Authentication failed.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        //updateUI(null)
+                    }
+                }
+        }
+        else {
+            Toast.makeText(requireContext(),"Password do not match.", Toast.LENGTH_SHORT).show()
+        }
     }
 
     companion object {

@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.example.android.mycartoonlist.common.Common
 import com.example.android.mycartoonlist.mainList.MainListElementFragment
 
 class AnimeItemActivity : AppCompatActivity() {
@@ -33,6 +34,12 @@ class AnimeItemActivity : AppCompatActivity() {
         when(item.itemId) {
             R.id.action_bar_animes_details_add -> {
                 /// add anime to database
+                if(Common.isLogged) {
+
+                }
+                else {
+
+                }
                 Toast.makeText(this,"Anime Added",Toast.LENGTH_SHORT).show()
             }
         }
