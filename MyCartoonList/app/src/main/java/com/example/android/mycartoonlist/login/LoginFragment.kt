@@ -15,6 +15,7 @@ import com.example.android.mycartoonlist.R
 import com.example.android.mycartoonlist.common.Common
 import com.example.android.mycartoonlist.common.Tags
 import com.example.android.mycartoonlist.createAccount.RegisterFragment
+import com.example.android.mycartoonlist.databaseHandlers.UserDatabaseHandler
 import com.example.android.mycartoonlist.newsFeed.NewsFeedFragment
 import com.example.android.mycartoonlist.recoverPassword.RecoverPasswordFragment
 import com.google.android.material.textfield.TextInputEditText
@@ -29,7 +30,9 @@ class LoginFragment : Fragment() {
     private lateinit var createAccountButton : TextView
     private lateinit var username : TextInputEditText
     private lateinit var password : TextInputEditText
+
     private lateinit var auth: FirebaseAuth
+    private val userDatabaseHandler = UserDatabaseHandler()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,6 +79,7 @@ class LoginFragment : Fragment() {
                     val user = auth.currentUser
                     Common.isLogged = true
                     Common.user = auth.currentUser
+                    Common.userData = userDatabaseHandler.getUserByEmail(Common.user!!.email.toString())
                     activity?.setResult(Activity.RESULT_OK)
                     activity?.finish()
                     //updateUI(user)

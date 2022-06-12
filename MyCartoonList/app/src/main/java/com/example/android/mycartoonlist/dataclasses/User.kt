@@ -1,12 +1,13 @@
 package com.example.android.mycartoonlist.dataclasses
 
 import java.io.Serializable
-import java.util.*
 
 data class User(
-    val id: UUID?,
+    val id: String?,
     val username: String,
+    val email: String,
+    var animesNumber: Int,
     val personalAnimes: List<UserAnime>?
 ) : Serializable {
-    constructor() : this(null, "", null)
+    constructor() : this(null, "", "", 0,null)
 }

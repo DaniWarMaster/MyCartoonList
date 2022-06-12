@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.android.mycartoonlist.common.Common
+import com.example.android.mycartoonlist.databaseHandlers.UserDatabaseHandler
 import com.example.android.mycartoonlist.mainList.MainListFragment
 import com.example.android.mycartoonlist.newsFeed.NewsFeedFragment
 import com.example.android.mycartoonlist.profile.ProfileFragment
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var drawer: DrawerLayout
     private lateinit var auth: FirebaseAuth
     private lateinit var navigationView: NavigationView
+    private val userDatabaseHandler = UserDatabaseHandler()
 
     public override fun onStart() {
         super.onStart()
@@ -51,6 +53,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Log.d("MainActivity: ", "User Already Logged ${auth.currentUser}")
             Common.isLogged = true
             Common.user = currentUser
+            Common.userData = userDatabaseHandler.getUserByEmail(currentUser.email.toString())
         }
         else {
             Log.d("MainActivity: ", "User Not Logged At App Start")

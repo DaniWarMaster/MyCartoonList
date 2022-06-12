@@ -9,12 +9,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import com.example.android.mycartoonlist.R
+import com.example.android.mycartoonlist.common.Common
 import com.example.android.mycartoonlist.common.Tags
+import com.example.android.mycartoonlist.databaseHandlers.UserDatabaseHandler
+import com.example.android.mycartoonlist.dataclasses.User
 import com.example.android.mycartoonlist.login.LoginFragment
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 
 
@@ -25,6 +29,8 @@ class RegisterFragment : Fragment() {
     private lateinit var password : TextInputEditText
     private lateinit var confirmPassword : TextInputEditText
     private lateinit var email : TextInputEditText
+
+    private val userDatabase = UserDatabaseHandler()
 
     private lateinit var auth : FirebaseAuth
     override fun onCreateView(
@@ -82,6 +88,10 @@ class RegisterFragment : Fragment() {
                             }
 
                         }
+                        //// add user to db
+                        println("Adding User ---> register fragment")
+                        userDatabase.addUser(User(null, usernameText, emailText, 0, null))
+
                         //// redirecting to login fragment
                         parentFragmentManager.beginTransaction()
                             .replace(R.id.drawer_fragment_container, LoginFragment()).commit()
