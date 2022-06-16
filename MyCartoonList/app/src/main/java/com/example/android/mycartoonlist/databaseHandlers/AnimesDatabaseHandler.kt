@@ -24,13 +24,13 @@ class AnimesDatabaseHandler {
             Common.animesList.clear()
             if(snapshot.exists()) {
                 snapshot.children.forEach { child ->
-                    println("-----> Item Found: ${child}")
+                    //println("-----> Item Found: ${child}")
 
                     val item : Data? = child.getValue(Data::class.java)
-                    println("-----> Item Converted: ${item}")
+                    //println("-----> Item Converted: ${item}")
                     if(item != null) {
                         Common.animesList.add(item)
-                        println("-----> Item Inserted")
+                        //println("-----> Item Inserted")
                     }
                 }
             }

@@ -76,17 +76,14 @@ class MainListElementFragment : Fragment() {
         animeImage2 = view.findViewById(R.id.mainList_details_recco2_image)
         animeText2 = view.findViewById(R.id.mainList_details_recco2_title)
 
-
         animeLayout3 = view.findViewById(R.id.mainList_details_recco3)
         animeImage3 = view.findViewById(R.id.mainList_details_recco3_image)
         animeText3 = view.findViewById(R.id.mainList_details_recco3_title)
-
 
         if(requireActivity().intent.hasExtra("data")) {
             val item : Data = requireActivity().intent.getSerializableExtra("data") as Data
             setData(item)
         }
-
     }
 
     private fun setData(item: Data) {

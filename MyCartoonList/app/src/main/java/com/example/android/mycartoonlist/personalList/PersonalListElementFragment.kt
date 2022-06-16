@@ -56,38 +56,39 @@ class PersonalListElementFragment : Fragment() {
         if (requireActivity().intent.hasExtra("personalData")) {
             val item: UserAnime =
                 requireActivity().intent.getSerializableExtra("personalData") as UserAnime
-            setData(item.anime!!)
+            setData(item)
         }
 
     }
 
-    private fun setData(item: Data) {
-        scor.text = "-"
-        rank.text = "-"
+    private fun setData(animeData: UserAnime) {
+        val anime = animeData.anime!!
+        scor.text = animeData.score.toString()
+        rank.text = animeData.category
         rating.text = "-"
         studio.text = "-"
 
-        nrOfEpisodes.text = item.episodes.toString()
-        type.text = item.type
-        title.text = item.title
+        nrOfEpisodes.text = anime.episodes.toString()
+        type.text = anime.type
+        title.text = anime.title
         var genresAux = "| "
-        item.tags?.forEach {
+        anime.tags?.forEach {
             genresAux += "${it} | "
         }
         genres.text = genresAux
 
         var summaryAux = ""
-        item.relations?.forEach {
+        anime.relations?.forEach {
             summaryAux += "${it} \n"
         }
         summary.text = summaryAux
 
-        aired.text = item.animeSeason?.year.toString()
-        season.text = item.animeSeason?.season
+        aired.text = anime.animeSeason?.year.toString()
+        season.text = anime.animeSeason?.season
 
-        source.text = item.sources?.get(0).toString()
+        source.text = anime.sources?.get(0).toString()
 
-        Picasso.get().load(item.picture).into(image)
+        Picasso.get().load(anime.picture).into(image)
     }
 
     companion object {

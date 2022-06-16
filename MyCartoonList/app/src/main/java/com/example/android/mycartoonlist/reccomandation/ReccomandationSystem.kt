@@ -13,7 +13,7 @@ class ReccomandationSystem {
         animesList.forEach { anime ->
             val score = calculateAnimeScore(animeMain, anime)
             animesRezultList.add(Pair(anime, score))
-            println("---> Animes Reccomended: ${score} - ${anime.title}")
+            //println("---> Animes Reccomended: ${score} - ${anime.title}")
         }
 
         val sortedList = animesRezultList.sortedWith(compareByDescending({it.second}))
@@ -21,7 +21,7 @@ class ReccomandationSystem {
         val aux = sortedList.subList(1, 4)
         val animesRzult = ArrayList<Data>()
         aux.forEach { pair ->
-            println("---> Animes Reccomended: ${pair.second} - ${pair.first.title}")
+            //println("---> Animes Reccomended: ${pair.second} - ${pair.first.title}")
             animesRzult.add(pair.first)
         }
         return animesRzult
