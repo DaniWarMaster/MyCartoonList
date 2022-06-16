@@ -1,17 +1,31 @@
 package com.example.android.mycartoonlist.mainList
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
+import com.example.android.mycartoonlist.AnimeItemActivity
 import com.example.android.mycartoonlist.R
 import com.example.android.mycartoonlist.dataclasses.Data
+import com.example.android.mycartoonlist.reccomandation.ReccomandationSystem
 import com.squareup.picasso.Picasso
 
 class MainListElementFragment : Fragment() {
+
+    private lateinit var animeText1: TextView
+    private lateinit var animeText2: TextView
+    private lateinit var animeText3: TextView
+    private lateinit var animeImage1: ImageView
+    private lateinit var animeImage2: ImageView
+    private lateinit var animeImage3: ImageView
+    private lateinit var animeLayout1: RelativeLayout
+    private lateinit var animeLayout2: RelativeLayout
+    private lateinit var animeLayout3: RelativeLayout
 
     private lateinit var scor : TextView
     private lateinit var nrOfEpisodes : TextView
@@ -35,6 +49,8 @@ class MainListElementFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_main_list_element, container, false)
     }
 
+    private val reccomandationSystem = ReccomandationSystem()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -51,6 +67,20 @@ class MainListElementFragment : Fragment() {
         rating = view.findViewById(R.id.mainList_details_rating)
         studio = view.findViewById(R.id.mainlist_details_studio)
         image = view.findViewById(R.id.mainList_details_image)
+
+        animeLayout1 = view.findViewById(R.id.mainList_details_recco1)
+        animeImage1 = view.findViewById(R.id.mainList_details_recco1_image)
+        animeText1 = view.findViewById(R.id.mainList_details_recco1_title)
+
+        animeLayout2 = view.findViewById(R.id.mainList_details_recco2)
+        animeImage2 = view.findViewById(R.id.mainList_details_recco2_image)
+        animeText2 = view.findViewById(R.id.mainList_details_recco2_title)
+
+
+        animeLayout3 = view.findViewById(R.id.mainList_details_recco3)
+        animeImage3 = view.findViewById(R.id.mainList_details_recco3_image)
+        animeText3 = view.findViewById(R.id.mainList_details_recco3_title)
+
 
         if(requireActivity().intent.hasExtra("data")) {
             val item : Data = requireActivity().intent.getSerializableExtra("data") as Data
@@ -86,6 +116,35 @@ class MainListElementFragment : Fragment() {
         source.text = item.sources?.get(0).toString()
 
         Picasso.get().load(item.picture).into(image)
+
+        val recoo = reccomandationSystem.getReccomandation(item)
+
+        Picasso.get().load(recoo[0].thumbnail).into(animeImage1)
+        animeText1.text = recoo[0].title
+        animeLayout1.setOnClickListener {
+            val intent = Intent(context , AnimeItemActivity::class.java).apply {
+                putExtra("data", recoo[0])
+            }
+            context?.startActivity(intent)
+        }
+
+        Picasso.get().load(recoo[1].thumbnail).into(animeImage2)
+        animeText2.text = recoo[1].title
+        animeLayout2.setOnClickListener {
+            val intent = Intent(context , AnimeItemActivity::class.java).apply {
+                putExtra("data", recoo[1])
+            }
+            context?.startActivity(intent)
+        }
+
+        Picasso.get().load(recoo[2].thumbnail).into(animeImage3)
+        animeText3.text = recoo[2].title
+        animeLayout3.setOnClickListener {
+            val intent = Intent(context , AnimeItemActivity::class.java).apply {
+                putExtra("data", recoo[2])
+            }
+            context?.startActivity(intent)
+        }
     }
 
     companion object {

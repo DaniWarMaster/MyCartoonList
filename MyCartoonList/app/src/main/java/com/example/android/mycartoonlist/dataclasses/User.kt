@@ -6,8 +6,9 @@ data class User(
     val id: String?,
     val username: String,
     val email: String,
+    val joinedDate: String,
     var animesNumber: Int,
     val personalAnimes: List<UserAnime>?
 ) : Serializable {
-    constructor() : this(null, "", "", 0,null)
+    constructor() : this(null, "", "", "",0,null)
 }

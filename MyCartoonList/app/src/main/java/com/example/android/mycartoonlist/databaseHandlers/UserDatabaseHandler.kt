@@ -16,7 +16,7 @@ class UserDatabaseHandler {
         val id = database.push().key
         Log.d("UserDatabaseHandler", "addUser: -----> ${id}")
 
-        val user = User(id, user.username, user.email, user.animesNumber, user.personalAnimes)
+        val user = User(id, user.username, user.email, user.joinedDate, user.animesNumber, user.personalAnimes)
 
         Log.d("UserDatabaseHandler", "addUser: -----> ${id}")
         database.child(id.toString()).setValue(user)

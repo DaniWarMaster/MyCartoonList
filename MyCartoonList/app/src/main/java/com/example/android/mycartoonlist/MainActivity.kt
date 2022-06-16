@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.android.mycartoonlist.common.Common
+import com.example.android.mycartoonlist.databaseHandlers.AnimesDatabaseHandler
 import com.example.android.mycartoonlist.databaseHandlers.UserDatabaseHandler
 import com.example.android.mycartoonlist.mainList.MainListFragment
 import com.example.android.mycartoonlist.newsFeed.NewsFeedFragment
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var auth: FirebaseAuth
     private lateinit var navigationView: NavigationView
     private val userDatabaseHandler = UserDatabaseHandler()
+    private val animeDatabaseHandler = AnimesDatabaseHandler()
 
     public override fun onStart() {
         super.onStart()
@@ -45,6 +47,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // intialize firebase
         auth = Firebase.auth
+        // intialize animes
+        animeDatabaseHandler.getAllAnimes()
 
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser

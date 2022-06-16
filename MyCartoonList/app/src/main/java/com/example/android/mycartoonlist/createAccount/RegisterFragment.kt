@@ -20,6 +20,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
+import java.time.LocalDateTime
 
 
 class RegisterFragment : Fragment() {
@@ -90,7 +91,7 @@ class RegisterFragment : Fragment() {
                         }
                         //// add user to db
                         println("Adding User ---> register fragment")
-                        userDatabase.addUser(User(null, usernameText, emailText, 0, null))
+                        userDatabase.addUser(User(null, usernameText, emailText, LocalDateTime.now().toString(), 0, null))
 
                         //// redirecting to login fragment
                         parentFragmentManager.beginTransaction()
