@@ -8,6 +8,15 @@
         <item>DROPPED</item>
     </string-array>
 
+    <string-array name="filter_array_values">
+        <item>ALL</item>
+        <item>WATCHED</item>
+        <item>WATCHING</item>
+        <item>PLANNED TO WATCH</item>
+        <item>ON HOLD</item>
+        <item>DROPPED</item>
+    </string-array>
+
     <string-array name="spinner_score">
         <item>1</item>
         <item>2</item>

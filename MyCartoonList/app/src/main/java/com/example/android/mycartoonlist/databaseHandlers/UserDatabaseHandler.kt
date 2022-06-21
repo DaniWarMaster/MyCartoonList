@@ -33,7 +33,7 @@ class UserDatabaseHandler {
 
     fun getUserByEmail(email: String) : User? {
         var user : User? = null
-        database.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(object : ValueEventListener {
+        database.orderByChild("email").equalTo(email).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()) {
                     Log.d("UserDatabaseHandler", "getUserByEmail: onDataChanged: Success -- ${snapshot.getValue()}")

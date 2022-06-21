@@ -7,6 +7,15 @@
     tools:context=".personalList.PersonalListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/personalList_fragment_recyclerView_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/personalList_fragment_recyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -2,6 +2,7 @@ package com.example.android.mycartoonlist.mainList
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +10,27 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.android.mycartoonlist.AnimeItemActivity
 import com.example.android.mycartoonlist.R
+import com.example.android.mycartoonlist.comments.CommentsAdapter
+import com.example.android.mycartoonlist.common.Common
+import com.example.android.mycartoonlist.dataclasses.Comment
 import com.example.android.mycartoonlist.dataclasses.Data
 import com.example.android.mycartoonlist.reccomandation.ReccomandationSystem
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 
 class MainListElementFragment : Fragment() {
+
+    private var commentDatabase = FirebaseDatabase.getInstance(Common.firebaseDatabasLocation).getReference("comments")
+    private lateinit var recyclerView: RecyclerView
+    private var arrayComment = ArrayList<Comment>()
+    private lateinit var commentAdapter : CommentsAdapter
 
     private lateinit var animeText1: TextView
     private lateinit var animeText2: TextView
@@ -80,6 +95,11 @@ class MainListElementFragment : Fragment() {
         animeImage3 = view.findViewById(R.id.mainList_details_recco3_image)
         animeText3 = view.findViewById(R.id.mainList_details_recco3_title)
 
+        recyclerView = view.findViewById(R.id.detailsElement_fragment_recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
+        commentAdapter = CommentsAdapter(arrayComment)
+        recyclerView.adapter = commentAdapter
+
         if(requireActivity().intent.hasExtra("data")) {
             val item : Data = requireActivity().intent.getSerializableExtra("data") as Data
             setData(item)
@@ -142,6 +162,32 @@ class MainListElementFragment : Fragment() {
             }
             context?.startActivity(intent)
         }
+
+        commentDatabase.child(item.title).addValueEventListener(postListener)
+    }
+
+    val postListener = object : ValueEventListener {
+        override fun onDataChange(snapshot: DataSnapshot) {
+            arrayComment.clear()
+            if(snapshot.exists()) {
+                snapshot.children.forEach { child ->
+                    //println("-----> Item Found: ${child}")
+
+                    val item : Comment? = child.getValue(Comment::class.java)
+                    //println("-----> Item Converted: ${item}")
+                    if(item != null) {
+                        arrayComment.add(item)
+                        //println("-----> Item Inserted")
+                    }
+                }
+            }
+            commentAdapter.notifyDataSetChanged()
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+            Log.d("Error", "Error at receiving the database")
+        }
+
     }
 
     companion object {
